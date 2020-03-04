@@ -45,6 +45,11 @@ async function fetchData() {
     return swaggerData;
 }
 
+/**
+ * 根据数据转换代码
+ * @param data
+ * @returns {Promise<void>}
+ */
 async function connerEalToHtml(data){
     const mocks = data[codeConfig.id] && data[codeConfig.id].mocks;
     const ejsData = {mocks, $$: utils}
@@ -86,23 +91,6 @@ async function connerEalToHtml(data){
 }
 
 
-// //1.获取接口数据
-// async function start() {
-//     const swaggerData = await axios.get(host, {
-//         params: {
-//             project_ids: projectIds.join(',')
-//         }
-//     })
-//     let data = swaggerData.data.data;
-//     if (data) {
-//         //请求数据
-//         filterAPI(data)
-//         const mocks = data[id].mocks
-//         const ejsData = {mocks, $$: utils}
-//
-//     }
-// }
-
 /**
  * 过滤黑白名单的数据
  * @param {AxiosResponse<T>} apis
@@ -132,7 +120,6 @@ function revertUrl(filters, url) {
 }
 
 
-// start();
 
 
 
