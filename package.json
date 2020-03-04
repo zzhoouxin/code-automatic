@@ -10,9 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "chalk": "^3.0.0",
+    "cosmiconfig": "^6.0.0",
     "ejs": "^3.0.1",
     "json-to-ts": "^1.6.0",
     "lodash": "^4.17.15",
+    "ora": "^4.0.3",
     "prettier": "^1.19.1"
   }
 }
