@@ -1,0 +1,19 @@
+import { post } from '../../../../base/httpClient';
+
+<% mocks.map(function (item) {  %>
+    /**
+    * <%= item.description%>
+    * @param <%=$$.convertParam(item)%> : <%=$$.convertQueryParamDesc(item)%>
+    */
+    export const <%=$$.convertMethod(item)%> = (<% if(!!$$.convertParam){%> <%=$$.convertParam(item)%> : <%=$$.convertParamFirstACapital(item)%> <%}%>) :Promise<BaseResponse<%-$$.responseName(item)%>> => {
+    return post("<%=item.url%>",<%=$$.convertParam(item)%> )
+    }
+<% })%>
+
+
+    export interface BaseResponse<T = any> {
+    code: number;
+    ext: any;
+    obj: T;
+    success: boolean;
+    }
