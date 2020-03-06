@@ -1,5 +1,5 @@
 # code-automatic
 Generate TS request code based on swagger
 
-#npm install 
-#node index.js
+# 1.npm install 
+# 2.node index.js
