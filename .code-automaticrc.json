@@ -5,6 +5,9 @@
     "/product/query-recommend",
     "/delivery-company/create",
     "/user/favorite/collect"
-  ]
+  ],
+  "model": {
+    "name": "codeAutomaticModel"
+  }
 }
 

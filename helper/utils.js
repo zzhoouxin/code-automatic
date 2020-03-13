@@ -5,7 +5,10 @@ exports.formatting = (ejs)=>{
 }
 
 
-
+/**
+ * action 方法名称
+ * @type {function(*): string}
+ */
 var convertUrl = exports.convertUrl = function(url) {
     // /restful/:id/:list/{id} -> restful_id_list_id
     // /restful/:id/:list/{id}.json -> restful_id_list_id
@@ -18,6 +21,11 @@ var convertUrl = exports.convertUrl = function(url) {
     return _url.split('.')[0]
 }
 
+/**
+ * 生成请求函数名称
+ * @param mock
+ * @returns {string}
+ */
 exports.convertMethod = function(mock) {
     // 防止重名
     // restful_id_list_id => restful_id_list_id_g
