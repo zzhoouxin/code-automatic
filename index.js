@@ -18,6 +18,10 @@ const {conversionModel} = require('./conversionModel')
 run();
 
 async function run() {
+    if(!fs.existsSync("Page")){
+        fs.mkdirSync(`Page`);
+    }
+
     spinners[0].start();
     const explorer = cosmiconfigSync("code-automatic");
     let {config} = explorer.search()
@@ -73,7 +77,7 @@ async function connerEalToHtml(data){
             if (responseModel && responseModel.example && responseModel.example.data && !_.isEmpty(responseModel.example.data)) {
                 let responseInterfaceName = utils.responseName(item);
                 JsonToTS(responseModel.example.data, {rootName: responseInterfaceName}).forEach(resTypeInterface => {
-                    interfaceContent += resTypeInterface + "\n";
+                    interfaceContent += "export " +resTypeInterface + "\n";
                 })
             }
             //处理请求的interface
@@ -85,7 +89,7 @@ async function connerEalToHtml(data){
                 }
                 let interFaceName = utils.convertParamFirstACapital(item);
                 JsonToTS(parameters.example, {rootName: interFaceName}).forEach(typeInterface => {
-                    interfaceContent += typeInterface + "\n";
+                    interfaceContent += "export " +typeInterface + "\n";
                 })
             }
         })
@@ -103,7 +107,6 @@ async function connerEalToHtml(data){
  * @param {AxiosResponse<T>} apis
  */
 function filterAPI(apis) {
-    debugger
     Object.keys(apis).forEach((projectId) => {
         var api = apis[projectId]
         var whiteList = codeConfig.white

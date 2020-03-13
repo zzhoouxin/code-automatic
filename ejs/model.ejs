@@ -1,14 +1,36 @@
 import {createModel} from "@rematch/core";
-import { <%= methodsName%>} from './action';
+import { <%= methodsName %> , <%= importInterFace%>} from './action';
 
 
-export const <%= modelName%> = createModel({
+export const <%= modelName %> = createModel({
 state: {
+<% effectMethod.map(function(item){%>
+    <%=item.queryMethod%>Data:{},
+    <%})%>
+},
+reducers: {
+setState: (state,payload) => {
+return {...state, ...payload};
 },
 
-
+},
 
 effects: dispatch => ({
+
+<% effectMethod.map(function(item){%>
+     async  <%= item.queryMethod%>(<%= item.params%>:<%= item.paramsType%> ){
+     let {code,obj}  =  await   <%=item.queryMethod%>(<%= item.params%>);
+         if(code  === 1){
+
+     dispatch.<%= modelName %>.setState({
+    <%= item.queryMethod%>Data:obj
+     })
+
+         }
+    },
+
+
+<% })%>
 
 })
 })

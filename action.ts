@@ -37,10 +37,10 @@ export interface BaseResponse<T = any> {
   success: boolean;
 }
 
-interface FavoriteDto {
+export interface FavoriteDto {
   productId: number;
 }
-interface ResponseVoListProductVo {
+export interface ResponseVoListProductVo {
   image: string;
   inventory: number;
   marketPrice: number;
@@ -56,14 +56,14 @@ interface ResponseVoListProductVo {
   sortWeight: number;
   spec: Spec[];
 }
-interface Spec {
+export interface Spec {
   name: string;
   value: string;
 }
-interface ProductId {
+export interface ProductId {
   productId: string;
 }
-interface DeliveryCompanyDto {
+export interface DeliveryCompanyDto {
   deliveryCode: string;
   deliveryName: string;
   state: number;
