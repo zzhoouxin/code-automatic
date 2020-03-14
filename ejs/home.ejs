@@ -1,0 +1,41 @@
+import React ,{Component} from "react"
+import { View} from "react-native";
+import {connect} from "react-redux";
+import {RootState} from "../../../store";
+
+const mapState = (state: RootState) => {
+return ({
+<%=modelName%>: state.<%=modelName%>,
+})
+};
+
+const mapDispatch = ({ <%=modelName%> }) => ({
+setState:<%=modelName%>.setState,
+<% mapDispatch.map(function(item){%>
+    <%= item%>:<%=modelName%>.<%= item%>,
+<% })%>
+});
+type Props = ReturnType<typeof mapState> & ReturnType<typeof mapDispatch>
+class <%=pageName%> extends Component<Props, any> {
+
+        constructor(props: Props) {
+        super(props);
+        }
+        componentDidMount() {
+        }
+
+
+
+
+        render(){
+        return (
+        <View/>
+
+        )
+        }
+
+
+}
+
+export default connect(mapState, mapDispatch)(<%=pageName%>);
+

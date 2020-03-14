@@ -1,33 +1,49 @@
 import {createModel} from "@rematch/core";
 import { <%= methodsName %> , <%= importInterFace%>} from './action';
+import {PageIndicatorProps, PageIndicatorStatus} from "../../../component/page-indicator";
+import { createResponseIndicatorProps, createLoadingProps} from "../../../utils/PageIndicatorUtils";
 
 
 export const <%= modelName %> = createModel({
 state: {
+//todo这边需要添加-PageIndicatorProps
+pageIndicator:{
+    status: PageIndicatorStatus.LOADING,
+    },
 <% effectMethod.map(function(item){%>
     <%=item.queryMethod%>Data:{},
     <%})%>
+
 },
 reducers: {
 setState: (state,payload) => {
 return {...state, ...payload};
 },
+updatePageIndicator:(state, pageIndicator: PageIndicatorProps)=> {
+return { ...state,pageIndicator};
+}
 
 },
 
 effects: dispatch => ({
 
-<% effectMethod.map(function(item){%>
+<% effectMethod.map(function(item,index){%>
      async  <%= item.queryMethod%>(<%= item.params%>:<%= item.paramsType%> ){
-     let {code,obj}  =  await   <%=item.queryMethod%>(<%= item.params%>);
-         if(code  === 1){
-
+        <% if(index ===0) {%>
+            dispatch. <%= item.queryMethod%>.updatePageIndicator(createLoadingProps());
+        <%}%>
+     let res =  await   <%=item.queryMethod%>(<%= item.params%>);
+         if(res && res.code  === 1){
      dispatch.<%= modelName %>.setState({
-    <%= item.queryMethod%>Data:obj
+    <%= item.queryMethod%>Data:res.obj
      })
+        }
+     <% if(index ===0) {%>
+         dispatch.<%= item.queryMethod%>.updatePageIndicator(createResponseIndicatorProps(res))
+     <%}%>
 
-         }
     },
+
 
 
 <% })%>

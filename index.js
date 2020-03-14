@@ -10,9 +10,8 @@ const utils = require("./helper/utils")//一些工具方法
 const ora = require("ora");
 let codeConfig = {};
 const spinners = [ora("代码自动生成中...")];
-const {conversionModel} = require('./conversionModel')
-
-
+const {conversionModel} = require('./theScript/conversionModel')
+const {conversionHome} = require('./theScript/home')
 
 
 run();
@@ -66,6 +65,8 @@ async function connerEalToHtml(data){
     let webApiHtml = utils.formatting(ejs.render(action, ejsData));
     //渲染model
     conversionModel(ejsData);
+    //渲染home
+    conversionHome(ejsData);
     // //写入数据
     await fs.writeFile('action.ts', webApiHtml, 'utf8', async () => {
         let interfaceContent = "\n";

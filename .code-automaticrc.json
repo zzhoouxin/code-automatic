@@ -8,6 +8,9 @@
   ],
   "model": {
     "name": "codeAutomaticModel"
+  },
+  "page": {
+    "name": "codeAutomaticPage"
   }
 }
 
